@@ -9,3 +9,5 @@ CSS로 만든 네 개의 입체 원형 버튼과 화면 전체 배경을 사용�
 로컬 확인: `python -m http.server 8765`.
 배포 파일 생성: `python tools/build_site.py`.
 main에 푸시하면 GitHub Actions가 CSS·JavaScript를 HTML에 포함한 단일 파일을 GitHub Pages에 배포합니다. 스타일 캐시에 의한 버전 혼합을 방지합니다.
+
+버튼을 누르면 1.5초간 추첨 연출 후 결과가 나타납니다. 당첨 시 입자와 빛, 1조원 당첨 시 JACKPOT 연출이 표시됩니다. 추첨 중 중복 클릭은 차단하고 Escape로 취소할 수 있습니다. 동작 줄이기 설정에서는 대기 시간을 0.15초로 줄이고 애니메이션을 끕니다.
