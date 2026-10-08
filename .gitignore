@@ -1,3 +1,4 @@
 node_modules/
 *.log
 verification/
+_site/

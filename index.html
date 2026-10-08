@@ -3,39 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f8d928">
-  <meta name="description" content="네 가지 돈 버튼, 네 가지 확률. 나의 선택과 당첨 기록을 확인하는 가벼운 확률 게임.">
-  <title>돈 버튼 · 오늘의 선택은?</title>
+  <meta name="theme-color" content="#d6e3fa">
+  <meta name="description" content="네 가지 돈 버튼으로 즐기는 가벼운 확률 체험.">
+  <title>돈 버튼</title>
   <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script>
 </head>
 <body>
   <main>
-    <header><a class="brand" href="./" aria-label="돈 버튼 홈"><span class="brand-mark">₩</span>돈 버튼<span class="brand-dot"></span></a><span class="edition">CHOOSE · PRESS · PLAY</span></header>
-    <div class="layout">
-      <section class="play" aria-labelledby="heading">
-        <p class="eyebrow">PICK YOUR LUCK</p>
-        <h1 id="heading">오늘은 어떤<br>버튼을 <span>누를까요?</span></h1>
-        <p class="intro">확실한 1억, 아니면 짜릿한 한 방.<br>마음이 가는 버튼을 눌러보세요.</p>
-        <div class="panel" aria-label="네 가지 금액 선택 버튼">
-          <button class="choice yellow" data-choice="0" aria-label="확률 100퍼센트, 1억원"><span class="choice-top"><span>안전한 선택</span><span class="number">01</span></span><strong>1억원</strong><span class="chance"><b>100%</b> 확률<span class="mini-dot"></span></span></button>
-          <button class="choice blue" data-choice="1" aria-label="확률 52퍼센트, 4억원"><span class="choice-top"><span>반반의 설렘</span><span class="number">02</span></span><strong>4억원</strong><span class="chance"><b>52%</b> 확률<span class="mini-dot"></span></span></button>
-          <button class="choice coral" data-choice="2" aria-label="확률 23퍼센트, 30억원"><span class="choice-top"><span>과감한 도전</span><span class="number">03</span></span><strong>30억원</strong><span class="chance"><b>23%</b> 확률<span class="mini-dot"></span></span></button>
-          <button class="choice green" data-choice="3" aria-label="확률 8퍼센트, 1조원"><span class="choice-top"><span>인생 한 방</span><span class="number">04</span></span><strong>1조원</strong><span class="chance"><b>8%</b> 확률<span class="mini-dot"></span></span></button>
-        </div>
-        <p class="play-note"><span></span>매번 새로운 추첨 · 당첨되지 않으면 0원</p>
-      </section>
-      <section class="stats" aria-labelledby="stats-heading">
-        <div class="stats-header"><div><p class="eyebrow">PLAYER RECORD</p><h2 id="stats-heading">나의 선택 기록</h2></div><span class="live-badge">LOCAL</span></div>
-        <div class="score-summary" aria-live="polite" aria-atomic="true"><div><span>총 선택</span><strong id="total-count">0<span>회</span></strong></div><div><span>실제 당첨률</span><strong id="win-rate">—</strong></div></div>
-        <div class="earnings"><span>누적 당첨 금액</span><strong id="total-amount">0원</strong><span class="earnings-note">획득한 보상, 차곡차곡.</span></div>
-        <div class="breakdown"><div class="table-label"><span>버튼별 기록</span><span>당첨 / 선택</span></div><div id="button-stats"></div></div>
-        <div class="stats-bottom"><span id="storage-note">이 브라우저에 자동 저장됩니다.</span><button id="reset" type="button">기록 초기화</button></div>
-      </section>
+    <h1 class="sr-only">돈 버튼</h1>
+    <div class="panel" aria-label="네 가지 금액 선택 버튼">
+      <button class="choice yellow" data-choice="0" aria-label="확률 100퍼센트, 1억원"><span class="face"><strong>1억원</strong><span class="chance">100% 확률</span></span></button>
+      <button class="choice blue" data-choice="1" aria-label="확률 52퍼센트, 4억원"><span class="face"><strong>4억원</strong><span class="chance">52% 확률</span></span></button>
+      <button class="choice coral" data-choice="2" aria-label="확률 23퍼센트, 30억원"><span class="face"><strong>30억원</strong><span class="chance">23% 확률</span></span></button>
+      <button class="choice green" data-choice="3" aria-label="확률 8퍼센트, 1조원"><span class="face"><strong>1조원</strong><span class="chance">8% 확률</span></span></button>
     </div>
-    <footer><span>돈 버튼 / RETRO EDITION</span><span>확률 체험용 · 실제 금전 지급 없음</span></footer>
+    <p class="note">확률 체험용 · 실제 금전 지급 없음</p>
   </main>
-  <dialog id="result" aria-labelledby="result-title" aria-describedby="result-description"><form method="dialog"><span class="result-tag" id="result-tag"></span><h2 id="result-title"></h2><p id="result-description"></p><button class="again" autofocus>다시 선택하기</button></form></dialog>
-  <dialog id="reset-dialog" aria-labelledby="reset-title"><form method="dialog"><h2 id="reset-title">기록을 지울까요?</h2><p>선택 횟수와 당첨 기록이 모두 초기화됩니다.</p><div class="reset-actions"><button value="cancel" autofocus>취소</button><button value="reset" class="confirm-reset">초기화</button></div></form></dialog>
+  <dialog id="result" aria-labelledby="result-title" aria-describedby="result-description"><form method="dialog"><span id="result-tag"></span><h2 id="result-title"></h2><p id="result-description"></p><button class="again" autofocus>다시 선택하기</button></form></dialog>
 </body>
 </html>
