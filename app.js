@@ -21,7 +21,10 @@ buttons.forEach(button => {
     buttons.forEach(el => { el.disabled = true; });
     button.classList.add('pulling');
     result.dataset.phase = 'drawing';
-    result.classList.remove('won', 'lost', 'jackpot');
+    result.className = '';
+    result.dataset.theme = 'gold';
+    document.querySelector('.reward-decor').replaceChildren();
+    document.querySelector('.loss-amount').textContent = ''; 
     document.querySelector('#result-tag').textContent = '두근두근… 추첨 중!';
     document.querySelector('#result-title').textContent = '?';
     document.querySelector('#result-description').textContent = `${choice.amount}의 행운을 기다리는 중…`;
@@ -32,10 +35,24 @@ buttons.forEach(button => {
       if (!result.open) return;
       result.dataset.phase = 'revealed';
       result.classList.add(won ? 'won' : 'lost');
+      result.dataset.theme = won ? ['gold', 'blue', 'coral', 'gold'][Number(button.dataset.choice)] : 'miss';
+      document.querySelector('.loss-amount').textContent = won ? '' : '꽝!';
+      const count = won ? [6, 8, 10, 14][Number(button.dataset.choice)] : 4;
+      document.querySelector('.reward-decor').replaceChildren(...Array.from({ length: count }, (_, i) => {
+        const el = document.createElement('span');
+        el.className = won ? (i % 3 === 0 ? 'reward-star' : 'reward-coin') : 'sad-spark';
+        el.textContent = won ? (i % 3 === 0 ? '✦' : '₩') : '✧';
+        const side = i % 2;
+        el.style.left = `${side ? 83 + i % 3 * 2 : 3 + i % 3 * 2}%`;
+        el.style.top = `${20 + Math.floor(i / 2) * 8}%`;
+        el.style.setProperty('--tilt', `${(i % 3 - 1) * 22}deg`);
+        el.style.setProperty('--delay', `${i * .08}s`);
+        return el;
+      }));
       if (won && choice.probability <= .08) result.classList.add('jackpot');
-      document.querySelector('#result-tag').textContent = won ? (choice.probability <= .08 ? 'JACKPOT!' : '당첨!') : '아쉽지만 다음 기회에';
+      document.querySelector('#result-tag').textContent = won ? (choice.probability <= .08 ? 'JACKPOT!' : choice.probability === .23 ? '대박 당첨!' : '당첨!') : '아쉽지만…';
       document.querySelector('#result-title').textContent = won ? choice.amount : '0원';
-      document.querySelector('#result-description').textContent = `${Math.round(choice.probability * 100)}% 확률의 ${choice.amount} 버튼을 선택했습니다.`;
+      document.querySelector('#result-description').textContent = won ? `${Math.round(choice.probability * 100)}% 확률 · ${choice.amount} 당첨` : '다음 기회에 다시 도전!';
       if (won && !reducedMotion.matches) {
         document.querySelector('.particles').replaceChildren(...Array.from({ length: 16 }, (_, i) => {
           const spark = document.createElement('span');
@@ -58,6 +75,7 @@ result.addEventListener('close', () => {
   busy = false;
   buttons.forEach(el => { el.disabled = false; el.classList.remove('pulling'); });
   document.querySelector('.particles').replaceChildren();
+  document.querySelector('.reward-decor').replaceChildren();
   delete result.dataset.phase;
 });
 result.addEventListener('click', event => {
