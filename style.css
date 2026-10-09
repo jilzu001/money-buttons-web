@@ -90,3 +90,8 @@ dialog form { position: relative; z-index: 1; }
 .one-chance p { font-size: clamp(26px, 6vw, 34px); margin: 14px 0 7px; font-weight: 900; letter-spacing: -.05em; text-shadow: 2px 2px 0 white; }
 .chance-sub { color: #596782; font-size: 14px; font-weight: 700; }
 @media (max-height: 520px) { .one-chance { margin-bottom: 18px; } .one-chance p { display: inline; font-size: 22px; margin-left: 15px; } .chance-sub { display: none; } }
+
+#daily-status { text-align:center; font-size:13px; line-height:1.6; margin:22px 0 0; }
+#daily-status:empty { display:none; }
+#today-result { display:block; min-height:44px; margin:14px auto 0; padding:10px 20px; border:2px solid var(--ink); background:#ffe34a; font-weight:800; }
+[hidden] { display:none !important; }
