@@ -1,27 +1,17 @@
 <!doctype html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#d6e3fa">
-  <meta name="description" content="네 가지 돈 버튼으로 즐기는 가벼운 확률 체험.">
-  <title>돈 버튼</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="app.js" defer></script>
-</head>
-<body>
-  <main>
-    <h1 class="sr-only">돈 버튼</h1>
-    <div class="one-chance"><span class="chance-kicker">ONE CHANCE</span><p>단 한 번의 선택</p><span class="chance-sub">하루 한 번 · 한국시간 자정 초기화</span></div>
-    <div class="panel" aria-label="네 가지 금액 선택 버튼">
-      <button class="choice yellow" data-choice="0" aria-label="확률 100퍼센트, 1억원"><span class="face"><strong>1억원</strong><span class="chance">100% 확률</span></span></button>
-      <button class="choice blue" data-choice="1" aria-label="확률 52퍼센트, 4억원"><span class="face"><strong>4억원</strong><span class="chance">52% 확률</span></span></button>
-      <button class="choice coral" data-choice="2" aria-label="확률 23퍼센트, 30억원"><span class="face"><strong>30억원</strong><span class="chance">23% 확률</span></span></button>
-      <button class="choice green" data-choice="3" aria-label="확률 8퍼센트, 1조원"><span class="face"><strong>1조원</strong><span class="chance">8% 확률</span></span></button>
-    </div>
-    <p id="daily-status" role="status" aria-live="polite"></p><button id="today-result" type="button" hidden>오늘 결과 확인</button>
-    <p class="note"><span>확률 체험용</span><span>실제 금전 지급 없음</span></p>
-  </main>
-  <dialog id="result" aria-labelledby="result-title" aria-describedby="result-description"><div class="reward-rays" aria-hidden="true"></div><div class="reward-decor" aria-hidden="true"></div><div class="particles" aria-hidden="true"></div><form method="dialog"><div class="result-art" aria-hidden="true"></div><span id="result-tag" role="status" aria-live="polite"></span><div class="empty-wallet" aria-hidden="true"><span></span></div><h2 id="result-title"></h2><p class="loss-amount"></p><p id="result-description"></p><button class="again" autofocus>확인</button><p class="result-notice">확률 체험용 · 실제 금전 지급 없음</p></form></dialog>
-</body>
-</html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#d6e3fa"><meta name="description" content="확률을 실험하고, 목표에 맞게 선택하고, 판단을 돌아보는 선택 실험실."><title>선택 실험실</title><link rel="stylesheet" href="style.css"><script src="app.js" defer></script></head>
+<body><main class="school">
+<header class="school-header"><span class="chance-kicker">CHOICE LAB</span><h1>선택 실험실</h1><p>운은 바뀌어도, 생각한 이유는 남아요.</p></header>
+<label class="field problem-field">오늘 살펴볼 문제<select id="problem"><option value="balanced">기초 · 평균 보상이 같은 별 문제</option><option value="original">응용 · 원래의 금액 문제</option></select></label><p id="problem-insight" class="help"></p>
+<nav class="mode-switch" aria-label="학습 모드"><button data-mode="practice" aria-pressed="true">① 확률 연습</button><button data-mode="decision" aria-pressed="false">② 오늘의 결정</button></nav>
+<section id="practice" aria-labelledby="practice-heading"><h2 id="practice-heading">여러 번 해보면 어떨까?</h2><p class="help">버튼을 고르고 10번 또는 100번 실험해 보세요. 연습은 오늘의 기회를 사용하지 않아요.</p></section>
+<section id="decision" hidden aria-labelledby="decision-heading"><h2 id="decision-heading">충분히 생각하고, 한 번 결정해요.</h2><p class="help">하루 한 번 · 한국시간 자정 초기화 · 확정한 선택은 되돌릴 수 없어요.</p><label class="field">이번 선택의 목표<select id="goal"><option value="need">별 2개가 꼭 필요해요</option><option value="bonus">별을 못 받아도 괜찮고, 많이 받고 싶어요</option></select></label><p id="goal-context" class="insight"></p></section>
+<div class="panel" aria-label="별 보상 선택"><button class="choice yellow" data-choice="0" aria-pressed="true"><span class="face"><strong>별 2개</strong><span class="chance">100% 확률</span></span></button><button class="choice blue" data-choice="1" aria-pressed="false"><span class="face"><strong>별 4개</strong><span class="chance">50% 확률</span></span></button><button class="choice coral" data-choice="2" aria-pressed="false"><span class="face"><strong>별 8개</strong><span class="chance">25% 확률</span></span></button><button class="choice green" data-choice="3" aria-pressed="false"><span class="face"><strong>별 20개</strong><span class="chance">10% 확률</span></span></button></div>
+<p id="selection-info" class="insight" aria-live="polite"></p>
+<div id="practice-tools"><div class="actions"><button data-runs="10">10번 실험</button><button data-runs="100">100번 실험</button></div><div class="lesson-card"><h3>예상과 실제 비교</h3><p class="help">예상 횟수는 반드시 맞아야 하는 답이 아니에요. 매 추첨은 독립적이에요.</p><div class="table-scroll"><table><thead><tr><th>선택</th><th>실험</th><th>예상 성공</th><th>실제 성공</th><th>평균 보상</th></tr></thead><tbody id="experiments"></tbody></table></div><p id="experiment-message" role="status" aria-live="polite">첫 실험을 해보세요.</p><button id="reset-practice" class="quiet">연습 기록 지우기</button></div><details class="lesson-card"><summary id="expected-heading"></summary><p id="expected-explanation"></p><p>실험이 많아지면 평균이 기대값에 가까워지는 경향이 있지만, 어느 횟수에서도 정확히 같다고 보장되지는 않아요. 한 번의 결과는 기대값과 달라요.</p></details></div>
+<div id="decision-tools" hidden><label class="field">이 버튼을 고른 이유<textarea id="reason" maxlength="240" rows="3" placeholder="내 목표, 못 받을 가능성, 받고 싶은 별을 생각해 보세요."></textarea></label><button id="review-choice" class="primary">선택을 확인하고 확정하기</button><p id="daily-status" role="status" aria-live="polite"></p><button id="today-result" class="primary" hidden>오늘 결정과 결과 보기</button><section id="reflection" class="lesson-card" hidden><h3>결과보다 생각을 돌아봐요</h3><p id="decision-recap"></p><p class="insight">성공했다고 꼭 좋은 판단, 못 받았다고 꼭 나쁜 판단은 아니에요.</p><label class="check"><input type="checkbox" id="understood"> 못 받을 가능성도 알고 선택했어요.</label><label class="check"><input type="checkbox" id="matched"> 내 목표에 맞는 선택인지 생각했어요.</label><label class="field">다음에는 어떤 정보를 더 살펴보고 싶나요?<textarea id="reflection-text" rows="3" maxlength="400"></textarea></label><button id="save-reflection" class="primary">돌아본 생각 저장</button><p id="reflection-status" role="status"></p></section></div>
+<p class="note"><span>확률·결정 교육용</span><span>별과 금액은 가상의 보상입니다</span></p><p class="privacy-note">오늘 결정과 돌아본 생각은 이 브라우저에만 저장됩니다. 연습 기록은 새로고침하면 초기화됩니다.</p>
+</main>
+<dialog id="confirm-choice" aria-labelledby="confirm-heading"><form method="dialog"><h2 id="confirm-heading">이 선택으로 확정할까요?</h2><p id="confirm-summary"></p><blockquote id="confirm-reason"></blockquote><p>확정하면 오늘 다시 추첨할 수 없어요. 취소하면 더 생각할 수 있어요.</p><div class="actions"><button value="cancel" autofocus>더 생각하기</button><button id="commit" value="commit" class="primary">이 선택 확정</button></div></form></dialog>
+<dialog id="learning-result" aria-labelledby="learning-title"><div class="learning-art" aria-hidden="true"></div><div class="learning-result-body"><span id="learning-tag" role="status" aria-live="polite"></span><h2 id="learning-title"></h2><p id="learning-description"></p><p class="result-principle">내 목표와 이유를 생각한 것, 그 자체가 중요해요.</p><button id="result-ok" class="primary">확인</button></div></dialog>
+</body></html>
