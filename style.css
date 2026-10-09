@@ -90,3 +90,22 @@ dialog form { position: relative; z-index: 1; }
 .one-chance p { font-size: clamp(26px, 6vw, 34px); margin: 14px 0 7px; font-weight: 900; letter-spacing: -.05em; text-shadow: 2px 2px 0 white; }
 .chance-sub { color: #596782; font-size: 14px; font-weight: 700; }
 @media (max-height: 520px) { .one-chance { margin-bottom: 18px; } .one-chance p { display: inline; font-size: 22px; margin-left: 15px; } .chance-sub { display: none; } }
+
+/* Image-based artwork, live text and button kept separate. */
+.result-art { display: none; }
+#result[data-phase="revealed"] { width: min(380px, calc(100% - 28px)); padding: 12px 12px 20px; border-width: 3px; }
+#result[data-phase="revealed"] .result-art { display: block; width: min(100%, calc(52svh * .53065)); aspect-ratio: 2043 / 3850; margin: 0 auto 14px; background-image: url("assets/rewards-8726928a1a.png"); background-size: 500% 100%; background-position: var(--art-position) center; background-repeat: no-repeat; animation: artwork-arrive .4s ease-out both; }
+#result[data-phase="revealed"] #result-tag, #result[data-phase="revealed"] #result-title, #result[data-phase="revealed"] .loss-amount { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); }
+#result[data-phase="revealed"] .reward-rays, #result[data-phase="revealed"] .reward-decor, #result[data-phase="revealed"] .empty-wallet { display: none; }
+#result[data-phase="revealed"] #result-description { margin: 0 0 15px; font-size: 15px; }
+#result[data-phase="revealed"] .again { width: 100%; position: relative; z-index: 5; }
+#result[data-phase="revealed"] .particles { z-index: 3; pointer-events: none; }
+@keyframes artwork-arrive { from { opacity: 0; transform: translateY(12px) scale(.94); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { #result[data-phase="revealed"] .result-art { animation: none; } }
+
+#daily-status { text-align: center; font-size: 13px; font-weight: 700; line-height: 1.6; margin: 25px 0 0; }
+#today-result { display: block; margin: 15px auto 0; min-height: 46px; padding: 10px 24px; border: 2px solid var(--ink); background: #fffbe9; box-shadow: 3px 3px 0 var(--ink); font-weight: 800; }
+#today-result[hidden] { display: none; }
+.choice:disabled:not(.pulling) .face { filter: saturate(.6); }
+
+.result-notice { font-size: 14px; line-height: 1.6; font-weight: 700; margin: 17px 0 0; color: var(--ink); }

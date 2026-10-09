@@ -1,5 +1,6 @@
 """Publish a self-contained page so cached CSS/JS cannot mix release versions."""
 from pathlib import Path
+import shutil
 
 root = Path(__file__).resolve().parent.parent
 output = root / '_site'
@@ -15,4 +16,6 @@ html = html.replace(style_link, '<style>\n' + css + '\n</style>')
 html = html.replace(script_link, '')
 html = html.replace('</body>', '<script>\n' + js + '\n</script>\n</body>')
 (output / 'index.html').write_text(html, encoding='utf-8')
+if (root / 'assets').exists():
+    shutil.copytree(root / 'assets', output / 'assets', dirs_exist_ok=True)
 print('Built self-contained index.html:', len(html.encode('utf-8')), 'bytes')
