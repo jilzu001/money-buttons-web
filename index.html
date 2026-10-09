@@ -1,10 +1,26 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#d6e3fa"><meta name="description" content="하루 한 번, 네 금액 버튼 중 하나를 선택하세요."><title>돈 버튼</title><link rel="stylesheet" href="style.css"><script src="app.js" defer></script></head>
-<body><main class="compact">
-<h1 class="sr-only">돈 버튼</h1><p class="hint">하루 한 번. 누르는 순간 선택은 끝.</p>
-<div class="panel" aria-label="가상 보상 선택"><button class="choice yellow" data-choice="0"><span class="face"><strong>1억원</strong><span class="chance">100% 확률</span></span></button><button class="choice blue" data-choice="1"><span class="face"><strong>4억원</strong><span class="chance">52% 확률</span></span></button><button class="choice coral" data-choice="2"><span class="face"><strong>30억원</strong><span class="chance">23% 확률</span></span></button><button class="choice green" data-choice="3"><span class="face"><strong>1조원</strong><span class="chance">8% 확률</span></span></button></div>
-<p id="daily-status" role="status" aria-live="polite"></p><button id="today-result" class="primary" hidden>오늘 결과 확인</button>
-<p class="note">실제 금전 지급 없음</p>
-</main>
-<dialog id="learning-result" aria-labelledby="learning-title"><div class="learning-art" aria-hidden="true"></div><div class="learning-result-body"><span id="learning-tag" role="status" aria-live="polite"></span><h2 id="learning-title"></h2><p id="learning-description"></p><button id="result-ok" class="primary">확인</button></div></dialog>
-</body></html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#d6e3fa">
+  <meta name="description" content="네 가지 돈 버튼으로 즐기는 가벼운 확률 체험.">
+  <title>돈 버튼</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1 class="sr-only">돈 버튼</h1>
+    <div class="one-chance"><span class="chance-kicker">ONE CHANCE</span><p>단 한 번의 선택</p><span class="chance-sub">당신의 운명을 누르세요</span></div>
+    <div class="panel" aria-label="네 가지 금액 선택 버튼">
+      <button class="choice yellow" data-choice="0" aria-label="확률 100퍼센트, 1억원"><span class="face"><strong>1억원</strong><span class="chance">100% 확률</span></span></button>
+      <button class="choice blue" data-choice="1" aria-label="확률 52퍼센트, 4억원"><span class="face"><strong>4억원</strong><span class="chance">52% 확률</span></span></button>
+      <button class="choice coral" data-choice="2" aria-label="확률 23퍼센트, 30억원"><span class="face"><strong>30억원</strong><span class="chance">23% 확률</span></span></button>
+      <button class="choice green" data-choice="3" aria-label="확률 8퍼센트, 1조원"><span class="face"><strong>1조원</strong><span class="chance">8% 확률</span></span></button>
+    </div>
+    <p class="note"><span>확률 체험용</span><span>실제 금전 지급 없음</span></p>
+  </main>
+  <dialog id="result" aria-labelledby="result-title" aria-describedby="result-description"><div class="reward-rays" aria-hidden="true"></div><div class="reward-decor" aria-hidden="true"></div><div class="particles" aria-hidden="true"></div><form method="dialog"><span id="result-tag" role="status" aria-live="polite"></span><div class="empty-wallet" aria-hidden="true"><span></span></div><h2 id="result-title"></h2><p class="loss-amount"></p><p id="result-description"></p><button class="again" autofocus>다시 선택하기</button></form></dialog>
+</body>
+</html>
